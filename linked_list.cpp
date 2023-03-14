@@ -55,6 +55,20 @@ public:
         cout << endl;
     }
 
+    int count(int x)
+    {
+        int count  = 0;
+        for(Node * p = head ; p!=NULL ; p->next)
+        {
+            if(p->data < x )
+            {
+                count+=1;
+            }
+        } 
+
+        return count;
+    }
+
     // Phương thức xoá nút đầu tiên trong danh sách liên kết
     void deleteFirst() {
         if (head == NULL) {
@@ -132,6 +146,18 @@ public:
         return maxVal;
     }
 
+    Node * (int x)
+    {
+        for(Node *p = head ; p!=NULL ; p->next)
+        {
+            if(p->data==x)
+            {
+                return p;
+            }
+        }
+
+        return NULL;
+    }
     // Phương thức sắp xếp các nút tăng dần trong danh sách liên kết
     void sortList() {
         Node* current = head;
