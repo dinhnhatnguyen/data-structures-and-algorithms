@@ -50,6 +50,16 @@ int sluong(List l,int x){ // so luong nut < x
 	return dem;
 	
 }
+//  int demnut_deQuy(node * p, int x)
+//     {
+//         if(p==NULL) return 0;
+//         if (p->x<x)
+//         {
+//             return i+demnut_deQuy(p->next,x);
+//         }
+// 		return demnut_deQuy(p->next,x)
+        
+//     }
 void sapxep(List l ){ // sap xep node 
 	for(node *q = l.head ; q!=NULL;q=q->next)
 		for(node *k = q->next;k!=NULL;k=k->next)
@@ -147,8 +157,6 @@ void chennutx(List &l, int x ){
 		chencuoi(l,q);
 	else {
 		node *k = l.head;
-		
-		node *b;
 		for( node *k = l.head;k!=NULL;k=k->next )
 			{	node *z = k->next;
 				if(z->x > x)
@@ -241,9 +249,28 @@ void show(List l){
 		cout << q->x<<" ";
 	
 }
+
+
+void chen(node *&p , int x)
+{
+	if(p==NULL||p->x>x)
+	chendau(p,x);
+	else chen(p->next,x);
+}
+
+void xoanut(node *&p , int x)
+{
+	if(p==NULL) return;
+	if(p->x==x){
+		xoadau(p);
+		return
+	}
+	else xoanut(p->next,x);
+}
 int main(){
 	List l,b;
 	khoitao(l);
+	khoitao(b);
 	int n ;
 	cin >> n;
 	for(int i =0;i<n;i++)
@@ -254,7 +281,7 @@ int main(){
 			node *q= taonode(a);
 			chencuoi(l,q);
 		}
-/*	for (int i =0  ; i<n;i++)
+	for (int i =0  ; i<n;i++)
 		{
 			int a ;
 			cin >> a;
@@ -262,24 +289,24 @@ int main(){
 			chencuoi(b,k);
 		}
 	// hop hai list
-	/*List h = taof3(l,b);
+	List h = taof3(l,b);
 	show(h);
 	cout<<"================="<<endl;
-	int b;
-	cin >> b;
-	cout<<sluong(l,b);
-	*/
+	//int b;
+	//cin >> b;
+	//cout<<sluong(l,b);
+	
 	// giao hai list
-	/*List k = taof4(l,b);
-	show(k);*/
+	List k = taof4(l,b);
+	show(k);
 //	sapxep(l);
-	int x ;
-	cin >> x;
+	//int x ;
+	//cin >> x;
 //	chennutx(l,x);
 	
-	xoax(l,x);
+	//xoax(l,x);
 	
-	show(l);
+	//show(l);
 	
 	
 }

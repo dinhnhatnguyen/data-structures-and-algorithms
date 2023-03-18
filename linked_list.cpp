@@ -69,6 +69,15 @@ public:
         return count;
     }
 
+    int demnut_deQuy(int x)
+    {
+        if(head==NULL) return 0;
+        if (he)
+        {
+            /* code */
+        }
+        
+    }
     // Phương thức xoá nút đầu tiên trong danh sách liên kết
     void deleteFirst() {
         if (head == NULL) {
@@ -146,7 +155,7 @@ public:
         return maxVal;
     }
 
-    Node * (int x)
+    Node * find_x(int x)
     {
         for(Node *p = head ; p!=NULL ; p->next)
         {
