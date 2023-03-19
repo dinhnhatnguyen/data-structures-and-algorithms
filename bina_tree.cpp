@@ -1,0 +1,133 @@
+
+#include <iostream>
+using namespace std;
+
+// định nghĩa cấu trúc Node
+struct Node {
+   int data;
+   Node* left;
+   Node* right;
+};
+
+// hàm tạo Node mới
+Node* createNode(int data) {
+   Node* newNode = new Node();
+   newNode->data = data;
+   newNode->left = NULL;
+   newNode->right = NULL;
+   return newNode;
+}
+
+// hàm tính chiều cao của cây nhị phân
+int getHeight(Node* root) {
+   if (root == NULL) {
+      return 0;
+   } else {
+      int leftHeight = getHeight(root->left);
+      int rightHeight = getHeight(root->right);
+      if (leftHeight > rightHeight) {
+         return (leftHeight + 1);
+      } else {
+         return (rightHeight + 1);
+      }
+   }
+}
+
+// hàm chèn Node mới vào cây nhị phân tìm kiếm
+Node* insertNode(Node* root, int data) {
+   if (root == NULL) {
+      root = createNode(data);
+   } else if (data <= root->data) {
+      root->left = insertNode(root->left, data);
+   } else {
+      root->right = insertNode(root->right, data);
+   }
+   return root;
+   /*
+   nếu giá trị của node mới nhỏ hơn giá trị của node hiện tại, 
+   ta chuyển sang cây con bên trái, ngược lại chuyển sang cây con bên phải
+   */
+}
+
+// hàm xoá tất cả các nút của cây nhị phân
+void deleteTree(Node* root) {
+    if (root == NULL) {
+        return;
+    }
+    deleteTree(root->left);
+    deleteTree(root->right);
+    delete root;
+}
+
+//hàm tìm giá trị nút lớn nhất trong cây nhị phân tìm kiếm
+int findMax(Node* root) {
+    if (root == NULL) {
+        return -1; // hoặc bất kỳ giá trị thích hợp khác
+    }
+    while (root->right != NULL) {
+        root = root->right;
+    }
+    return root->data;
+    /*
+    chỉ cần duyệt hết các nút bên phải nút cuối cùng là nút có giá trị lớn nhất
+    */
+}
+
+//hàm tìm giá trị nút lớn nhất trong cây nhị phân không phải là cây nhị phân tìm kiếm
+int findMax_b(Node* root) {
+    int maxVal = root->data;
+    if (root->left != NULL) {
+        int leftMax = findMax(root->left);
+        maxVal = max(maxVal, leftMax);
+    }
+    if (root->right != NULL) {
+        int rightMax = findMax(root->right);
+        maxVal = max(maxVal, rightMax);
+    }
+    return maxVal;
+}
+
+//Đếm số nút của cây
+int countNode(Node* root)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+    return 1 + countNode(root->left) +countNode(root->right);
+}
+ 
+// hàm in giá trị  của cây nhị phân theo thứ tự trước (preorder)
+void printNode(Node* root) {
+   if (root != NULL) {
+      cout << root->data << " ";
+      printNode(root->left);
+      printNode(root->right);
+   }
+}
+
+
+
+int main() {
+   Node* root = NULL;
+   root = insertNode(root, 50);
+   insertNode(root, 30);
+   insertNode(root, 20);
+   insertNode(root, 40);
+   insertNode(root, 70);
+   insertNode(root, 60);
+   insertNode(root, 80);
+
+
+   cout<<endl;
+
+   cout << "Duyệt cây nhị phân theo thứ tự trước: ";
+   printNode(root);
+
+   cout << "\nChiều cao của cây nhị phân là: " << getHeight(root)<<endl;
+   cout<<"Max val = "<<findMax(root)<<endl;
+   cout<<"số nút: "<<countNode(root)<<endl;
+
+}
+
+
