@@ -39,7 +39,7 @@ HocSinh BoSungHS_cuoi(HocSinh *F, int MaHS,St25 TenHS , St8 NgaySinh)
 {
      // tự viết
 }
-HocSinh capNhat(HocSinh *p , St25 tenHS , st8 ngaySinh)
+HocSinh capNhat(HocSinh *p , St25 tenHS , St8 ngaySinh)
 {
      // tự viết
 }
@@ -55,7 +55,7 @@ void XoaLop(Lop F,St8 Blop)
 }
 void BoSung(Lop *F , St8 Blop , int Mahs , St25 tenHS, St8 ngaySinh)
 {
-    Lop *k == Diachi(F,Blop);
+    Lop *k = Diachi(F,Blop);
     if(k==NULL)
     {
         ThemLop_DauDS(F,Blop);
@@ -73,11 +73,11 @@ void BoSung(Lop *F , St8 Blop , int Mahs , St25 tenHS, St8 ngaySinh)
     }
 }
 
-void Xoa(Lop*&F, St8 Blop, int BmaHS)
+void Xoa(Lop*F, St8 Blop, int BmaHS)
 {
-    Lop k = Diachi(F,Blop);
-    XoaHS(k.DSHS,BmaHS);
-    if(k.DSHS==NULL)
+    Lop * k = Diachi(F,Blop);
+    XoaHS(k->DSHS,BmaHS);
+    if(k->DSHS==NULL);
     XoaLop(F,Blop);
 
 }
