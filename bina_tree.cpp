@@ -97,6 +97,15 @@ int countNode(Node* root)
     return 1 + countNode(root->left) +countNode(root->right);
 }
  
+//tìm nút cha
+Node *findeParentNode(Node* root , Node *p)
+{
+    if(root==NULL || p==NULL) return NULL;
+    if(root->left==p||root->right==p) return root;
+    Node *tmp = findeParentNode(root->left,p);
+    if(tmp!=NULL) return tmp;
+    return findeParentNode(root->right,p);
+}
 // hàm in giá trị  của cây nhị phân theo thứ tự trước (preorder)
 void printNode(Node* root) {
    if (root != NULL) {
