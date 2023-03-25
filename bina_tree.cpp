@@ -7,6 +7,7 @@ struct Node {
    int data;
    Node* left;
    Node* right;
+
 };
 
 // hàm tạo Node mới
@@ -105,6 +106,36 @@ Node *findeParentNode(Node* root , Node *p)
     Node *tmp = findeParentNode(root->left,p);
     if(tmp!=NULL) return tmp;
     return findeParentNode(root->right,p);
+}
+
+// tìm mức của nút được trỏ bởi p thuộc cây T
+int level(Node *root,Node *p)
+{
+    if (root == NULL || p == NULL) {
+        return -1;
+    }
+    if (root == p) {
+        return 0;
+    }
+    Node* parent = findeParentNode(root, p);
+    if (parent == NULL) {
+        return -1;
+    }
+    return level(root, parent) + 1;
+   
+}
+
+// tìm địa chỉ của nút có giá trị = x
+Node *find_Address(Node* root,int x)
+{
+   if(root == NULL) return NULL;
+   if(root->data == x) return root;
+
+   Node *left = find_Address(root->left,x);
+   if(left != NULL) return left;
+   Node *right = find_Address(root->right,x);
+   if(right !=NULL) return right;
+   return NULL;
 }
 // hàm in giá trị  của cây nhị phân theo thứ tự trước (preorder)
 void printNode(Node* root) {

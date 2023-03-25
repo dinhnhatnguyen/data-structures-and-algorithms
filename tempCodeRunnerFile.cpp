@@ -1,1 +1,0 @@
-cout<<"Max val = "<<findMax(root)<<end;
