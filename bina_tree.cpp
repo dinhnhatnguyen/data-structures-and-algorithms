@@ -39,9 +39,9 @@ Node* insertNode(Node* root, int data) {
    if (root == NULL) {
       root = createNode(data);
    } else if (data <= root->data) {
-      root->left = insertNode(root->left, data);
-   } else {
       root->right = insertNode(root->right, data);
+   } else {
+      root->left = insertNode(root->left, data);
    }
    return root;
    /*
@@ -137,6 +137,52 @@ Node *find_Address(Node* root,int x)
    if(right !=NULL) return right;
    return NULL;
 }
+
+//in giảm dần
+void print_descending_value(Node *root)
+{
+
+   /*
+   dùng duyệt giữa trái-gốc-phải
+   */
+   if(root==NULL)
+   {
+      return;
+   }
+   print_descending_value(root->right);
+   cout << root->data << " ";
+   print_descending_value(root->left);
+}
+
+//tạo và sao chép dữ liệu vào cây mới
+Node *create_New_Tree(Node *root)
+{
+   if(root == NULL) return NULL;
+   Node *L = createNode(root->data);
+   L->left = create_New_Tree(root->left);
+   L->right = create_New_Tree(root->right);
+   return L;
+}
+
+//kiểm tra cây nhị phân tìm kiếm
+
+bool isBST(Node *root)
+{
+   if(root == NULL) return true;
+   if(root->left == NULL && right ==NULL) return true;
+   if(root->left != NULL && root->right != NULL) return isBST(root->left)<=isBST(root->right);
+   return false;
+}
+
+// tìm cấp của cây nhị phân
+int get_height(Node *root)
+{
+   if(root==NULL) return 0;
+   int left = getHeight(root->left);
+   int right = get_height(root->right);
+   return max(left,right) + 1;
+}
+
 // hàm in giá trị  của cây nhị phân theo thứ tự trước (preorder)
 void printNode(Node* root) {
    if (root != NULL) {
@@ -164,10 +210,11 @@ int main() {
    cout << "Duyệt cây nhị phân theo thứ tự trước: ";
    printNode(root);
 
-   cout << "\nChiều cao của cây nhị phân là: " << getHeight(root)<<endl;
-   cout<<"Max val = "<<findMax(root)<<endl;
-   cout<<"số nút: "<<countNode(root)<<endl;
-
+   // cout << "\nChiều cao của cây nhị phân là: " << getHeight(root)<<endl;
+   // cout<<"Max val = "<<findMax(root)<<endl;
+   // cout<<"số nút: "<<countNode(root)<<endl;
+   if(isBST(root)) cout<<"true"<<endl;
+   else cout<<"false"<<endl;
 }
 
 
