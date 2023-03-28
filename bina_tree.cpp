@@ -22,7 +22,7 @@ Node* createNode(int data) {
 // hàm tính chiều cao của cây nhị phân
 int getHeight(Node* root) {
    if (root == NULL) {
-      return 0;
+      return -1;
    } else {
       int leftHeight = getHeight(root->left);
       int rightHeight = getHeight(root->right);
