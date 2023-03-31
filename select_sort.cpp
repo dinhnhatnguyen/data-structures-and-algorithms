@@ -3,10 +3,10 @@ using namespace std;
 
 void select_sort(int n , int a[])
 {
-    for(int i =0 ; i<n-2 ; i++)
+    for(int i =0 ; i<n ; i++)
     {
         int min_local = i;
-        for(int j = i+1; j<n ; j++)
+        for(int j = i+1; j<n-2 ; j++)
         {
             if(a[min_local]>a[j])
             {
