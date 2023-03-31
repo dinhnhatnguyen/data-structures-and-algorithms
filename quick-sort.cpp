@@ -1,64 +1,65 @@
 #include <iostream>
 using namespace std;
 
+// Hàm phân hoạch mảng
 
-//6 8 3 9 5 7
-//pivot = 1
-//i = -1
-//j = 0 -> 4
-//j = 0: 6 8 3 9 5 7 i=0
-//j = 1:
-//j = 2: 6 3 8 9 5 7 i=1
-//j = 3:
-//j = 4: 6 3 5 9 8 7 i=2
-///: 6 2 5 7 8 9 i = 3 
-void swap(int &a, int &b)
+/*
+    phân hoạch mảng sao cho
+    nửa trái gồm các phần tử < chốt
+    nửa phải gồm các phần tử >= chốt
+*/
+int phanHoach(int a[],int L , int R , int Chot)
 {
-    int c = a;
-    a = b;
-    b = c;
-}
-
-bool ascending(int a, int b)
-{
-    return a > b;
-}
-
-int partition(int l, int r, int a[], bool compare(int, int))
-{
-    int pivot = a[r];
-    int i = l-1;
-    int j;
-    for(int j = l; j<r; j++)
+    int trai = L;
+    int phai = R;
+    // Lặp cho đến khi trai >= phai
+    while (trai < phai)
     {
-        if(compare(pivot,a[j]))
-        {
-            i++;
-            swap(a[i], a[j]);
+        // Tìm phần tử đầu tiên từ trái lớn hơn Chot
+        while(a[trai] < Chot) trai += 1;
+        // Tìm phần tử đầu tiên từ phải nhỏ hơn hoặc bằng Chot
+        while(a[phai] > Chot) phai -= 1;
+        // Nếu trai <= phai, hoán đổi hai phần tử và tăng trai, giảm phai
+        if(trai <= phai) {
+            swap(a[trai],a[phai]);
+            trai++;
+            phai--;
+            /*
+                trai++ và phai-- được sử dụng để di chuyển chỉ số trai và phai sau khi hoán đổi hai phần tử a[trai] và a[phai]
+            */
         }
     }
-    swap(a[++i],a[r]);
-
-    return i;
+    // Trả về chỉ số của phần tử cuối cùng nhỏ hơn hoặc bằng Chot
+    return trai;
 }
 
-void quickSort(int l, int r, int a[], bool compare(int, int))
+// Hàm đệ quy thực hiện Quick Sort trên mảng
+void quickSort(int a[],int L,int R)
 {
-    if(l < r)
+    // Điều kiện dừng: nếu L >= R, return
+    if(L < R)
     {
-        int pivot = partition(l,r,a,compare);
-
-        quickSort(l,pivot-1,a,compare);
-        quickSort(pivot+1,r,a,compare);
+        // Chọn phần tử giữa làm chốt
+        int chot = a[(L + R) / 2];
+        // Phân hoạch mảng và lấy chỉ số của phần tử cuối cùng nhỏ hơn hoặc bằng chốt
+        int k = phanHoach(a,L,R,chot);
+        // Đệ quy sắp xếp hai mảng con trước và sau chốt
+        quickSort(a,L,k-1);
+        quickSort(a,k,R);
     }
 }
 
-int main()
-{
-    int a[6] = {6,8,3,9,5,7};
-    quickSort(0,5,a,ascending);
-    for(int i = 0; i < 6; i++)
-    {
-        cout<<a[i]<<" ";
+int main() {
+    int a[] = {9, 3, 4, 2, 1, 8};
+    int n = 6;
+    // Thực hiện Quick Sort trên mảng a
+    quickSort(a, 0, n - 1);
+    
+    // In mảng đã sắp xếp
+    for (int i = 0; i < n; i++) {
+        cout << a[i] << " ";
     }
+    
+    return 0;
 }
+

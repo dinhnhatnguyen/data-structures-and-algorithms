@@ -22,6 +22,26 @@ void insertion_sort(int a[], int n)
         a[j+1] = key;
     }
 }
+
+// void buble_sort(int a[], int n)
+// {
+//     for(int i =0  ; i< n-1 ; i++)
+//         for(int j = i+1 ; j<n ; j++)
+//         {
+//             if(a[i]>a[j]) swap(a[i],a[j]);
+//         }
+// }
+
+
+void buble_sort(int a[], int n)
+{
+    for(int i =0  ; i< n-1 ; i++)
+        for(int j = n-1 ; j>=i+1 ; j--)
+        {
+            if(a[j]<a[j-1]) swap(a[j-1],a[j]);
+        }
+}
+
 void show (int a[], int n)
 {
     for(int i=0;i<n;i++ )
