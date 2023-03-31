@@ -3,7 +3,7 @@ using namespace std;
 
 void select_sort(int n , int a[])
 {
-    for(int i =0 ; i<n-1 ; i++)
+    for(int i =0 ; i<n-2 ; i++)
     {
         int min_local = i;
         for(int j = i+1; j<n ; j++)

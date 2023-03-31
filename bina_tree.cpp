@@ -39,9 +39,9 @@ Node* insertNode(Node* root, int data) {
    if (root == NULL) {
       root = createNode(data);
    } else if (data <= root->data) {
-      root->right = insertNode(root->right, data);
-   } else {
       root->left = insertNode(root->left, data);
+   } else {
+      root->right = insertNode(root->right, data);
    }
    return root;
    /*
@@ -115,7 +115,7 @@ int level(Node *root,Node *p)
         return -1;
     }
     if (root == p) {
-        return 0;
+        return 1;
     }
     Node* parent = findeParentNode(root, p);
     if (parent == NULL) {
@@ -169,7 +169,7 @@ Node *create_New_Tree(Node *root)
 bool isBST(Node *root)
 {
    if(root == NULL) return true;
-   if(root->left == NULL && right ==NULL) return true;
+   if(root->left == NULL && root->right ==NULL) return true;
    if(root->left != NULL && root->right != NULL) return isBST(root->left)<=isBST(root->right);
    return false;
 }
@@ -208,13 +208,14 @@ int main() {
    cout<<endl;
 
    cout << "Duyệt cây nhị phân theo thứ tự trước: ";
-   printNode(root);
+   // printNode(root);
+   print_descending_value(root);
 
    // cout << "\nChiều cao của cây nhị phân là: " << getHeight(root)<<endl;
    // cout<<"Max val = "<<findMax(root)<<endl;
    // cout<<"số nút: "<<countNode(root)<<endl;
-   if(isBST(root)) cout<<"true"<<endl;
-   else cout<<"false"<<endl;
+   // if(isBST(root)) cout<<"true"<<endl;
+   // else cout<<"false"<<endl;
 }
 
 
