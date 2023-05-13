@@ -22,7 +22,7 @@ int phanHoach(int a[],int L , int R , int Chot)
         // Nếu trai <= phai, hoán đổi hai phần tử và tăng trai, giảm phai
         if(trai <= phai) {
             swap(a[trai],a[phai]);
-            trai++;
+            trai++; // đoạn ni thầy thiếu thì nhớ hỏi lại thầy :v
             phai--;
             /*
                 trai++ và phai-- được sử dụng để di chuyển chỉ số trai và phai sau khi hoán đổi hai phần tử a[trai] và a[phai]
