@@ -40,14 +40,7 @@ void themvaodau(nut *&L, int n)
 }
 
 
-// void themvaosau(nut *L, int n)
-// {
-//     nut *q = newnode(n);
-//     nut *p;
-//     for(p = L ; p!=NULL ; p =p->tiep);
-//     p->tiep = q;
-//     q->tiep = NULL;
-// }
+
 
 void themvaosau(nut *L, int n)
 {
@@ -69,7 +62,7 @@ int kiemtra(nut *L)
 }
 
 
-// nut *Giao_2_ds(nut* l1, nut*l2)
+// nut *Giao_2_ds(nut* l1, nut*l2)  Cách 1
 // {
 //     nut *l3 = NULL;
 
@@ -81,7 +74,7 @@ int kiemtra(nut *L)
 //     return l3;
 // }
 
-nut *Giao_2_ds(nut *l1, nut *l2)
+nut *Giao_2_ds(nut *l1, nut *l2) // cách 2
 {
     nut *l3 = NULL;
     nut *p = l1;
@@ -109,11 +102,20 @@ nut *Giao_2_ds(nut *l1, nut *l2)
 }
 
 
+nut *copy(nut *l , nut* G)
+{
+     for(nut *p = l ; p!=NULL ; p= p->tiep)
+    {
+        themvaosau(G,p->so);
+    }
 
+    return G;
+}
 
 
 nut *Hop_2_ds(nut * l1 , nut *l2)
 {
+
     if(l1==NULL) return l2;
     if(l2==NULL) return l1;
 
@@ -132,6 +134,47 @@ nut *Hop_2_ds(nut * l1 , nut *l2)
     }
 
     return l3;
+}
+
+
+/*
+    Sắp xếp lựa chọn
+
+    Ý tưởng
+        1. Duyệt qua từng vị trí của mảng từ vị trí đầu đến vị trí cuối.
+        2. Tại mỗi vị trí, tìm phần tử nhỏ nhất (hoặc lớn nhất) trong đoạn chưa được sắp xếp từ vị trí hiện tại đến cuối mảng.
+        3. Hoán đổi phần tử nhỏ nhất (hoặc lớn nhất) với phần tử ở vị trí hiện tại.
+        4. Tiếp tục tìm kiếm và hoán đổi cho đến khi hoàn thành duyệt qua tất cả các vị trí.
+
+    Ví dụ: a[12, 2, 8, 5, 1, 6, 4, 15]
+        Bước 1: Tại vị trí đầu tiên (index 0), tìm phần tử nhỏ nhất trong đoạn chưa được sắp xếp (từ index 0 đến index 7). Phần tử nhỏ nhất là 1.
+
+        Bước 2: Hoán đổi phần tử nhỏ nhất (1) với phần tử ở vị trí hiện tại (12). Mảng sau bước này: [1, 2, 8, 5, 12, 6, 4, 15].
+
+        Bước 3: Tại vị trí thứ hai (index 1), tìm phần tử nhỏ nhất trong đoạn chưa được sắp xếp (từ index 1 đến index 7). Phần tử nhỏ nhất là 2.
+
+        Bước 4: Hoán đổi phần tử nhỏ nhất (2) với phần tử ở vị trí hiện tại (2). Mảng sau bước này: [1, 2, 8, 5, 12, 6, 4, 15].
+
+        Bước 5: Tiếp tục các bước tương tự cho các vị trí còn lại.
+
+        Bước 6: Kết quả cuối cùng là mảng đã được sắp xếp: [1, 2, 4, 5, 6, 8, 12, 15].
+
+*/
+
+void select_sort(int n , int a[])
+{
+    for(int i=0 ; i<n ; i++)
+    {
+        int min_local = i;
+        for(int j = i+1; j<n-2 ; j++)
+        {
+            if(a[min_local]>a[j])
+            {
+                min_local = j; // lấy vị trí phần tử nhỏ nhất
+            }
+        }
+        swap(a[i],a[min_local]);
+    }
 }
 
 int main()
@@ -236,6 +279,3 @@ CÂY NHỊ PHÂN
 //     }
     
 // }
-for(int i = 0 ; i<n-1 ; i++)
-    for(int j = i+1 ;)
-

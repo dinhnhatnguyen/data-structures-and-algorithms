@@ -69,15 +69,11 @@ public:
         return count;
     }
 
-    int demnut_deQuy(int x)
-    {
-        if(head==NULL) return 0;
-        if (he)
-        {
-            /* code */
-        }
-        
-    }
+    // int demnut_deQuy(int x)
+    // {
+    //     if(head==NULL) return 0;
+       
+    // }
     // Phương thức xoá nút đầu tiên trong danh sách liên kết
     void deleteFirst() {
         if (head == NULL) {
