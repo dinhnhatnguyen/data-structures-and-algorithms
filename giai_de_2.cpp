@@ -21,7 +21,7 @@ void dem(int a[], int n)
         int dem = 0 ;
         for(int j = i+1; j<n; j++)
         {
-            if(a[i]>a[j]) dem++;
+            if(a[i]>=a[j]) dem++;
         } 
         b[i] = dem;
     }
